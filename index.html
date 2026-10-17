@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#0f1420" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Teclado" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <title>Teclado: aprenda a tocar</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <section id="library" class="screen">
+        <header class="lib-header">
+          <h1>🎹 Teclado</h1>
+          <p class="subtitle">Escolha uma música e toque no seu teclado MIDI.</p>
+          <div id="midi-status" class="midi-status"></div>
+        </header>
+        <div id="song-list"></div>
+      </section>
+
+      <section id="practice" class="screen hidden">
+        <header class="bar">
+          <button id="back" class="icon" aria-label="Voltar">‹</button>
+          <div class="title">
+            <strong id="song-title"></strong>
+            <span id="song-meta"></span>
+          </div>
+          <div class="stats">
+            <span title="Precisão"><b id="accuracy">100%</b> precisão</span>
+            <span title="Sequência"><b id="streak">0</b> seguidas</span>
+          </div>
+          <button id="toggle-tools" class="icon" aria-label="Ferramentas">⚙︎</button>
+        </header>
+
+        <div id="tools" class="tools">
+          <label class="tool">
+            <span>Velocidade <b id="speed-label">100%</b></span>
+            <input id="speed" type="range" min="25" max="150" step="5" value="100" />
+          </label>
+          <div class="tool">
+            <span>Mãos</span>
+            <div class="segmented" id="hands">
+              <button data-hand="L">Esquerda</button>
+              <button data-hand="both" class="on">Ambas</button>
+              <button data-hand="R">Direita</button>
+            </div>
+          </div>
+          <label class="tool check"><input id="wait" type="checkbox" /> Wait Mode <small>espera você acertar</small></label>
+          <div class="tool">
+            <span>Repetir trecho</span>
+            <div class="loop">
+              <label>compasso <input id="loop-from" type="number" min="1" value="1" /></label>
+              <label>até <input id="loop-to" type="number" min="1" value="4" /></label>
+              <button id="loop-toggle">Ativar</button>
+            </div>
+          </div>
+          <label class="tool check"><input id="metronome" type="checkbox" /> Metrônomo</label>
+          <label class="tool check"><input id="sound" type="checkbox" checked /> Som das minhas notas</label>
+          <label class="tool check"><input id="names" type="checkbox" checked /> Nome das notas</label>
+        </div>
+
+        <div class="stage">
+          <canvas id="canvas"></canvas>
+          <div id="overlay" class="overlay">
+            <button id="play" class="big">▶ Começar</button>
+            <p class="hint">Sem teclado MIDI? Toque nas teclas da tela ou use A W S E D F T G Y H U J K no computador.</p>
+          </div>
+          <div id="result" class="overlay hidden">
+            <div class="card">
+              <div id="stars" class="stars"></div>
+              <h2 id="result-title"></h2>
+              <p id="result-detail"></p>
+              <div class="actions">
+                <button id="again" class="big">Tocar de novo</button>
+                <button id="to-library">Outras músicas</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="controls">
+          <button id="restart" aria-label="Recomeçar">⟲</button>
+          <button id="pause" aria-label="Pausar">❚❚</button>
+          <input id="progress" type="range" min="0" max="1000" value="0" aria-label="Posição na música" />
+        </footer>
+      </section>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
